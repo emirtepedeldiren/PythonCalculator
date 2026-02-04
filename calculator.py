@@ -19,13 +19,20 @@ calculate_label.grid(row=0, column=0, columnspan=4, sticky="we", pady=(50, 20))
 def click_button(value):
     
     current = display_text.get()
-    
+    operators = ["+" , "-" , "/" , "*" , "X"]
+
     if current == "0":
         
-        if value == "X":
-            display_text.set("*")
+        if value in operators:
+            display_text.set("0" + ("*" if value == "X" else value))
         else:
             display_text.set(value)
+    
+    elif value in operators and current[-1] in ["+" , "-" , "/" , "*" , "X"]:
+        
+        new_value = "*" if value == "X" else value
+        display_text.set(current[:-1] + new_value)      
+
     else:
         
         if value == "X":
